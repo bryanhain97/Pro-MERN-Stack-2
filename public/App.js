@@ -22,33 +22,137 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var HelloWorld = /*#__PURE__*/function (_React$Component) {
-  _inherits(HelloWorld, _React$Component);
+var IssueFilter = /*#__PURE__*/function (_React$Component) {
+  _inherits(IssueFilter, _React$Component);
 
-  var _super = _createSuper(HelloWorld);
+  var _super = _createSuper(IssueFilter);
 
-  function HelloWorld() {
-    _classCallCheck(this, HelloWorld);
+  function IssueFilter() {
+    _classCallCheck(this, IssueFilter);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(HelloWorld, [{
+  _createClass(IssueFilter, [{
     key: "render",
     value: function render() {
-      var continents = ['Africa', 'America', 'Asia', 'Australia', 'Europe'];
-      var helloContinents = continents.map(function (c) {
-        return "Hello ".concat(c);
-      });
-      var message = helloContinents.join(' ');
-      return /*#__PURE__*/React.createElement("div", {
-        title: "Outer div"
-      }, /*#__PURE__*/React.createElement("h1", null, message));
+      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for the issue filter.");
     }
   }]);
 
-  return HelloWorld;
+  return IssueFilter;
 }(React.Component);
 
-var element = /*#__PURE__*/React.createElement(HelloWorld, null);
+var IssueRow = /*#__PURE__*/function (_React$Component2) {
+  _inherits(IssueRow, _React$Component2);
+
+  var _super2 = _createSuper(IssueRow);
+
+  function IssueRow() {
+    _classCallCheck(this, IssueRow);
+
+    return _super2.apply(this, arguments);
+  }
+
+  _createClass(IssueRow, [{
+    key: "render",
+    value: function render() {
+      var style = this.props.style;
+      var issue_id = this.props.issue_id;
+      var issue_title = this.props.issue_title;
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
+        style: style
+      }, issue_id), /*#__PURE__*/React.createElement("td", {
+        style: style
+      }, issue_title));
+    }
+  }]);
+
+  return IssueRow;
+}(React.Component);
+
+var IssueTable = /*#__PURE__*/function (_React$Component3) {
+  _inherits(IssueTable, _React$Component3);
+
+  var _super3 = _createSuper(IssueTable);
+
+  function IssueTable() {
+    _classCallCheck(this, IssueTable);
+
+    return _super3.apply(this, arguments);
+  }
+
+  _createClass(IssueTable, [{
+    key: "render",
+    value: function render() {
+      var rowStyle = {
+        border: "1px solid silver",
+        padding: 4
+      };
+      return /*#__PURE__*/React.createElement("table", {
+        style: {
+          borderCollapse: "collapse"
+        }
+      }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+        style: rowStyle
+      }, "ID"), /*#__PURE__*/React.createElement("th", {
+        style: rowStyle
+      }, "Title"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement(IssueRow, {
+        style: rowStyle,
+        issue_id: 1,
+        issue_title: "Error in the console when clicking Add"
+      }), /*#__PURE__*/React.createElement(IssueRow, {
+        style: rowStyle,
+        issue_id: 2,
+        issue_title: "Missing bottom border on panel"
+      })));
+    }
+  }]);
+
+  return IssueTable;
+}(React.Component);
+
+var IssueAdd = /*#__PURE__*/function (_React$Component4) {
+  _inherits(IssueAdd, _React$Component4);
+
+  var _super4 = _createSuper(IssueAdd);
+
+  function IssueAdd() {
+    _classCallCheck(this, IssueAdd);
+
+    return _super4.apply(this, arguments);
+  }
+
+  _createClass(IssueAdd, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for a form to add an issue.");
+    }
+  }]);
+
+  return IssueAdd;
+}(React.Component);
+
+var IssueList = /*#__PURE__*/function (_React$Component5) {
+  _inherits(IssueList, _React$Component5);
+
+  var _super5 = _createSuper(IssueList);
+
+  function IssueList() {
+    _classCallCheck(this, IssueList);
+
+    return _super5.apply(this, arguments);
+  }
+
+  _createClass(IssueList, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Issue Tracker"), /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueAdd, null));
+    }
+  }]);
+
+  return IssueList;
+}(React.Component);
+
+var element = /*#__PURE__*/React.createElement(IssueList, null);
 ReactDOM.render(element, document.querySelector('#root'));
