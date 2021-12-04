@@ -1,6 +1,15 @@
-const element = (
-    <div id="Outer div">
-        <h1>Hello World!</h1>
-    </div>
-);
+class HelloWorld extends React.Component {
+    render() {
+        const continents = ['Africa', 'America', 'Asia', 'Australia', 'Europe'];
+        const helloContinents = continents.map(c => `Hello ${c}`);
+        const message = helloContinents.join(' ');
+        return (
+            <div title="Outer div">
+                <h1>{message}</h1>
+            </div>
+        )
+    }
+}
+
+const element = <HelloWorld />
 ReactDOM.render(element, document.querySelector('#root'))

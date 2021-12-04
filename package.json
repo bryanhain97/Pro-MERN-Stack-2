@@ -4,14 +4,16 @@
   "description": "Pro Mern Stack 2 Book work along",
   "main": "index.js",
   "scripts": {
-    "start": "cd ./server && node server.js",
+    "start": "nodemon -w server server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "npx babel src/App.jsx --out-dir public"
+    "compile": "babel src/App.jsx --out-dir public",
+    "watch": "babel src/App.jsx --out-dir public --watch --verbose"
   },
   "author": "Bryan Hain",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
