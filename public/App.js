@@ -57,14 +57,14 @@ var IssueRow = /*#__PURE__*/function (_React$Component2) {
   _createClass(IssueRow, [{
     key: "render",
     value: function render() {
+      // couldn't use destructuring assignment. 
       var style = this.props.style;
       var issue_id = this.props.issue_id;
-      var issue_title = this.props.issue_title;
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
         style: style
       }, issue_id), /*#__PURE__*/React.createElement("td", {
         style: style
-      }, issue_title));
+      }, this.props.children));
     }
   }]);
 
@@ -99,13 +99,11 @@ var IssueTable = /*#__PURE__*/function (_React$Component3) {
         style: rowStyle
       }, "Title"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement(IssueRow, {
         style: rowStyle,
-        issue_id: 1,
-        issue_title: "Error in the console when clicking Add"
-      }), /*#__PURE__*/React.createElement(IssueRow, {
+        issue_id: 1
+      }, "Error in the console when clicking Add"), /*#__PURE__*/React.createElement(IssueRow, {
         style: rowStyle,
-        issue_id: 2,
-        issue_title: "Missing bottom border on panel"
-      })));
+        issue_id: 2
+      }, "Missing bottom border on panel")));
     }
   }]);
 
