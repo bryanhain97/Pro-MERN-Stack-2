@@ -120,8 +120,7 @@ var IssueTable = /*#__PURE__*/function (_React$Component3) {
     key: "render",
     value: function render() {
       var issueRows = this.state.issues.map(function (issue) {
-        /*#__PURE__*/
-        React.createElement(IssueRow, {
+        return /*#__PURE__*/React.createElement(IssueRow, {
           issue: issue,
           key: issue.id
         });
