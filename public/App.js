@@ -77,7 +77,7 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
 
 var IssueRow = function IssueRow(props) {
   var issue = props.issue;
-  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due), /*#__PURE__*/React.createElement("td", null, issue.title));
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due), /*#__PURE__*/React.createElement("td", null, issue.title)));
 };
 
 var IssueTable = function IssueTable(props) {
@@ -87,9 +87,10 @@ var IssueTable = function IssueTable(props) {
       key: issue.id
     });
   });
+  console.log(issueRows);
   return /*#__PURE__*/React.createElement("table", {
     className: "bordered-table"
-  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "ID"), /*#__PURE__*/React.createElement("td", null, "Status"), /*#__PURE__*/React.createElement("td", null, "Owner"), /*#__PURE__*/React.createElement("td", null, "Created"), /*#__PURE__*/React.createElement("td", null, "Effort"), /*#__PURE__*/React.createElement("td", null, "Due Date"), /*#__PURE__*/React.createElement("td", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRows));
+  }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "ID"), /*#__PURE__*/React.createElement("td", null, "Status"), /*#__PURE__*/React.createElement("td", null, "Owner"), /*#__PURE__*/React.createElement("td", null, "Created"), /*#__PURE__*/React.createElement("td", null, "Effort"), /*#__PURE__*/React.createElement("td", null, "Due Date"), /*#__PURE__*/React.createElement("td", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null));
 };
 
 var IssueAdd = /*#__PURE__*/function (_React$Component2) {

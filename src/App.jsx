@@ -13,21 +13,24 @@ class IssueFilter extends React.Component {
 const IssueRow = (props) => {
     const issue = props.issue;
     return (
-        <tr>
-            <td>{issue.id}</td>
-            <td>{issue.status}</td>
-            <td>{issue.owner}</td>
-            <td>{issue.created.toDateString()}</td>
-            <td>{issue.effort}</td>
-            <td>{issue.due}</td>
-            <td>{issue.title}</td>
-        </tr>
+        <React.Fragment>
+            <tr>
+                <td>{issue.id}</td>
+                <td>{issue.status}</td>
+                <td>{issue.owner}</td>
+                <td>{issue.created.toDateString()}</td>
+                <td>{issue.effort}</td>
+                <td>{issue.due}</td>
+                <td>{issue.title}</td>
+            </tr>
+        </React.Fragment>
     )
 }
 const IssueTable = (props) => {
     const issueRows = props.issues.map(issue => (
         <IssueRow issue={issue} key={issue.id} />
     ));
+    console.log(issueRows);
     return (
         <table className="bordered-table">
             <thead>
@@ -42,7 +45,7 @@ const IssueTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {issueRows}
+                {/* {issueRows} */}
             </tbody>
         </table>
     )
