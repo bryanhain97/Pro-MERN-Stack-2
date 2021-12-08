@@ -80,18 +80,17 @@ var IssueRow = function IssueRow(props) {
   return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created ? issue.created.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
 };
 
-var IssueTable = function IssueTable(props) {
+function IssueTable(props) {
   var issueRows = props.issues.map(function (issue) {
-    var id = issue.id;
     return /*#__PURE__*/React.createElement(IssueRow, {
-      key: id,
+      key: issue.id,
       issue: issue
     });
   });
   return /*#__PURE__*/React.createElement("table", {
     className: "bordered-table"
   }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, "ID"), /*#__PURE__*/React.createElement("td", null, "Status"), /*#__PURE__*/React.createElement("td", null, "Owner"), /*#__PURE__*/React.createElement("td", null, "Created"), /*#__PURE__*/React.createElement("td", null, "Effort"), /*#__PURE__*/React.createElement("td", null, "Due Date"), /*#__PURE__*/React.createElement("td", null, "Title"))), /*#__PURE__*/React.createElement("tbody", null, issueRows));
-};
+}
 
 var IssueAdd = /*#__PURE__*/function (_React$Component2) {
   _inherits(IssueAdd, _React$Component2);
