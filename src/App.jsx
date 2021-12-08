@@ -1,7 +1,9 @@
 const initialIssues = [
-    { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: new Date('2018-08-15'), due: undefined, title: 'Error in console when clicking Add' },
-    { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: new Date('2018-08-16'), due: new Date('2018-08-30'), title: 'Missing bottom border on panel' }
+    { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: '20-13-3', due: undefined, title: 'Error in console when clicking Add' },
+    { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: '20-31-2', due: '12-2-12', title: 'Missing bottom border on panel' }
 ];
+
+// If we use new Date() for either created or due prop, we can't render components. 
 
 class IssueFilter extends React.Component {
     render() {
@@ -13,24 +15,22 @@ class IssueFilter extends React.Component {
 const IssueRow = (props) => {
     const issue = props.issue;
     return (
-        <React.Fragment>
-            <tr>
-                <td>{issue.id}</td>
-                <td>{issue.status}</td>
-                <td>{issue.owner}</td>
-                <td>{issue.created.toDateString()}</td>
-                <td>{issue.effort}</td>
-                <td>{issue.due}</td>
-                <td>{issue.title}</td>
-            </tr>
-        </React.Fragment>
+        <tr>
+            <td>{issue.id}</td>
+            <td>{issue.status}</td>
+            <td>{issue.owner}</td>
+            <td>{issue.created}</td>
+            <td>{issue.effort}</td>
+            <td>{issue.due}</td>
+            <td>{issue.title}</td>
+        </tr>
     )
 }
 const IssueTable = (props) => {
-    const issueRows = props.issues.map(issue => (
-        <IssueRow issue={issue} key={issue.id} />
-    ));
-    console.log(issueRows);
+    const issueRows = props.issues.map(issue => {
+        const id = issue.id;
+        return <IssueRow key={id} issue={issue} />
+    });
     return (
         <table className="bordered-table">
             <thead>
@@ -45,7 +45,7 @@ const IssueTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {/* {issueRows} */}
+                {issueRows}
             </tbody>
         </table>
     )
