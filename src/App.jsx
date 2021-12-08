@@ -1,6 +1,6 @@
 const initialIssues = [
-    { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: '20-13-3', due: undefined, title: 'Error in console when clicking Add' },
-    { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: '20-31-2', due: '12-2-12', title: 'Missing bottom border on panel' }
+    { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: new Date('2018-05-15'), due: undefined, title: 'Error in console when clicking Add' },
+    { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: new Date('2018-05-30'), due: new Date('2012-02-12'), title: 'Missing bottom border on panel' }
 ];
 
 // If we use new Date() for either created or due prop, we can't render components. 
@@ -19,9 +19,9 @@ const IssueRow = (props) => {
             <td>{issue.id}</td>
             <td>{issue.status}</td>
             <td>{issue.owner}</td>
-            <td>{issue.created}</td>
+            <td>{issue.created ? issue.created.toDateString(): ''}</td>
             <td>{issue.effort}</td>
-            <td>{issue.due}</td>
+            <td>{issue.due ? issue.due.toDateString() : ''}</td>
             <td>{issue.title}</td>
         </tr>
     )

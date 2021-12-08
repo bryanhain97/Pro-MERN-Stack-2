@@ -39,7 +39,7 @@ var initialIssues = [{
   status: 'New',
   owner: 'Ravan',
   effort: 5,
-  created: '20-13-3',
+  created: new Date('2018-05-15'),
   due: undefined,
   title: 'Error in console when clicking Add'
 }, {
@@ -47,10 +47,10 @@ var initialIssues = [{
   status: 'Assigned',
   owner: 'Eddie',
   effort: 14,
-  created: '20-31-2',
-  due: '12-2-12',
+  created: new Date('2018-05-30'),
+  due: new Date('2012-02-12'),
   title: 'Missing bottom border on panel'
-}];
+}]; // If we use new Date() for either created or due prop, we can't render components. 
 
 var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _inherits(IssueFilter, _React$Component);
@@ -77,7 +77,7 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
 
 var IssueRow = function IssueRow(props) {
   var issue = props.issue;
-  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due), /*#__PURE__*/React.createElement("td", null, issue.title));
+  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created ? issue.created.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
 };
 
 var IssueTable = function IssueTable(props) {
