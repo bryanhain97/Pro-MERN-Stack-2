@@ -13,7 +13,7 @@ type Mutation {
 `;
 const resolvers = {
     Query: {
-        about = () => aboutMessage
+        about: () => aboutMessage
     },
     Mutation: {
         setAboutMessage,
