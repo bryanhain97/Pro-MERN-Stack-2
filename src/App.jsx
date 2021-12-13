@@ -1,10 +1,3 @@
-const initialIssues = [
-    { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: new Date('2018-05-15'), due: undefined, title: 'Error in console when clicking Add' },
-    { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: new Date('2018-05-30'), due: new Date('2012-02-12'), title: 'Missing bottom border on panel' }
-];
-
-// If we use new Date() for either created or due prop, we can't render components. 
-
 class IssueFilter extends React.Component {
     render() {
         return (
@@ -19,9 +12,9 @@ const IssueRow = (props) => {
             <td>{issue.id}</td>
             <td>{issue.status}</td>
             <td>{issue.owner}</td>
-            <td>{issue.created ? issue.created.toDateString() : ''}</td>
+            <td>{issue.created}</td>
             <td>{issue.effort}</td>
-            <td>{issue.due ? issue.due.toDateString() : ''}</td>
+            <td>{issue.due}</td>
             <td>{issue.title}</td>
         </tr>
     )
@@ -82,14 +75,24 @@ class IssueList extends React.Component {
     createIssue(issue) {
         issue.id = this.state.issues.length + 1;
         issue.created = new Date();
-        const newIssueList = [...this.state.issues]; // OR: newIssueList = this.state.issues.slice()
+        const newIssueList = [...this.state.issues];
         newIssueList.push(issue);
         this.setState({ issues: newIssueList })
     };
-    loadData() {
-        setTimeout(() => {
-            this.setState({ issues: initialIssues })
-        }, 1000);
+    async loadData() {
+        const query = `query {
+            issueList {
+                id title owner effort created due
+            }
+        }`
+        const response = await fetch('/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
+        })
+        const result = await response.json();
+        console.log(response, result);
+        this.setState({ issues: result.data.issueList })
     };
     componentDidMount() {
         this.loadData();
