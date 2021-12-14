@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 class IssueFilter extends React.Component {
     render() {
         return (
