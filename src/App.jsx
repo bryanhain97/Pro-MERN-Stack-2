@@ -88,7 +88,7 @@ class IssueList extends React.Component {
                 id title status owner effort created due
             }
         }`
-        const response = await fetch('http://localhost/graphql', {
+        const response = await fetch('/graphql', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })

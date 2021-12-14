@@ -174,7 +174,7 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
               case 0:
                 query = "query {\n            issueList {\n                id title status owner effort created due\n            }\n        }";
                 _context.next = 3;
-                return fetch('http://localhost/graphql', {
+                return fetch('/graphql', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'

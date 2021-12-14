@@ -9,8 +9,7 @@
                     "safari": "19",
                     "firefox": "50",
                     "chrome": "49"
-                },
-                "useBuiltIns": "usage"
+                }
             }
         ],
         "@babel/preset-react"
