@@ -191,12 +191,11 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
 
               case 6:
                 result = _context.sent;
-                console.log(response, result);
                 this.setState({
                   issues: result.data.issueList
                 });
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }

@@ -94,7 +94,6 @@ class IssueList extends React.Component {
             body: JSON.stringify({ query })
         })
         const result = await response.json();
-        console.log(response, result);
         this.setState({ issues: result.data.issueList })
     };
     componentDidMount() {
