@@ -1,17 +1,19 @@
+scalar GraphQLDate
+
 type Issue {
     id: Int!
     title: String!
     status: String!
     owner: String
     effort: Int
-    created: String!
-    due: String
+    created: GraphQLDate!
+    due: GraphQLDate
 }
 type Query {
     about: String!,
     issueList: [Issue!]!
 }
 type Mutation {
-    setAboutMessage(message: String!): String
+    setAboutMessage(message: String!): String,
 }
 
