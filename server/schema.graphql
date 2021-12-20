@@ -10,11 +10,11 @@ type Issue {
     due: GraphQLDate
 }
 type Query {
-    about: String!,
+    about: String!
     issueList: [Issue!]!
 }
 type Mutation {
-    setAboutMessage(message: String!): String,
+    setAboutMessage(message: String!): String
     issueAdd(issue: IssueInputs!): Issue!
 }
 

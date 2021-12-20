@@ -11,15 +11,20 @@ const GraphQLDate = new GraphQLScalarType({
     serialize(value) {
         return value.toISOString();
     },
-    parseLiteral(ast) {
-        return (ast.kind == Kind.STRING) ? new Date(ast.value) : undefined;
-    },
     parseValue(value) {
-        return new Date(value);
-    }
+        const dateValue = new Date(value);
+        return Number.isNaN(dateValue.getTime()) ? undefined : dateValue;
+    },
+    parseLiteral(ast) {
+        if (ast.kind === Kind.STRING) {
+            const value = new Date(ast.value);
+            return Number.isNaN(value.getTime()) ? undefined : value;
+        }
+        return undefined;
+    },
 })
 
-let aboutMessage = "Issue Tracker API v1.0";
+const aboutMessage = "Issue Tracker API v1.0";
 const issueDB = [
     { id: 1, status: 'New', owner: 'Ravan', effort: 5, created: new Date('2019-01-15'), due: undefined, title: 'Error in console when clicking Add' },
     { id: 2, status: 'Assigned', owner: 'Eddie', effort: 14, created: new Date('2019-01-16'), due: new Date('2019-02-01'), title: 'Missing bottom border on panel' }
@@ -31,7 +36,7 @@ const resolvers = {
     },
     Mutation: {
         setAboutMessage,
-        issueAdd,
+        issueAdd
     },
     GraphQLDate
 };
