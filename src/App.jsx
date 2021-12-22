@@ -18,7 +18,7 @@ class IssueFilter extends React.Component {
     }
 };
 const IssueRow = (props) => {
-    const issue = props.issue; ƒ
+    const issue = props.issue;
     return (
         <tr>
             <td>{issue.id}</td>

@@ -10,18 +10,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -110,12 +98,13 @@ var IssueAdd = /*#__PURE__*/function (_React$Component2) {
   _createClass(IssueAdd, [{
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
+      e.preventDefault(); // prevent default GET request to target blank
+
       var form = document.forms.issueAdd;
       var issue = {
         owner: form.owner.value,
         title: form.title.value,
-        status: 'New'
+        due: new Date(new Date().getTime() + 1000 * 3600 * 24 * 10)
       };
       this.props.createIssue(issue);
       form.owner.value = "";
@@ -162,29 +151,16 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
 
   _createClass(IssueList, [{
     key: "createIssue",
-    value: function createIssue(issue) {
-      issue.id = this.state.issues.length + 1;
-      issue.created = new Date();
-
-      var newIssueList = _toConsumableArray(this.state.issues);
-
-      newIssueList.push(issue);
-      this.setState({
-        issues: newIssueList
-      });
-    }
-  }, {
-    key: "loadData",
     value: function () {
-      var _loadData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var query, response, body, result;
+      var _createIssue = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(issue) {
+        var query, response;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                query = "query {\n            issueList {\n                id title status owner effort created due\n            }\n        }";
+                query = "mutation {\n            issueAdd(issue: {\n                title: \"".concat(issue.title, "\",\n                owner: \"").concat(issue.owner, "\",\n                due: \"").concat(issue.due.toISOString(), "\",\n            }){\n                id\n            }\n        }");
                 _context.next = 3;
-                return fetch('/graphql', {
+                return fetch('graphql', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json'
@@ -196,11 +172,50 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
 
               case 3:
                 response = _context.sent;
-                _context.next = 6;
+                this.loadData();
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function createIssue(_x) {
+        return _createIssue.apply(this, arguments);
+      }
+
+      return createIssue;
+    }()
+  }, {
+    key: "loadData",
+    value: function () {
+      var _loadData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var query, response, body, result;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                query = "query {\n            issueList {\n                id title status owner effort created due\n            }\n        }";
+                _context2.next = 3;
+                return fetch('/graphql', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    query: query
+                  })
+                });
+
+              case 3:
+                response = _context2.sent;
+                _context2.next = 6;
                 return response.text();
 
               case 6:
-                body = _context.sent;
+                body = _context2.sent;
                 result = JSON.parse(body, jsonDateReviver);
                 this.setState({
                   issues: result.data.issueList
@@ -208,10 +223,10 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
 
               case 9:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
+        }, _callee2, this);
       }));
 
       function loadData() {
