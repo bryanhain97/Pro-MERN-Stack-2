@@ -18,7 +18,7 @@ class IssueFilter extends React.Component {
     }
 };
 const IssueRow = (props) => {
-    const issue = props.issue;
+    const issue = props.issue; ƒ
     return (
         <tr>
             <td>{issue.id}</td>
@@ -60,9 +60,9 @@ class IssueAdd extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); // prevent default GET request to target blank
         const form = document.forms.issueAdd;
-        const issue = { owner: form.owner.value, title: form.title.value, due: new Date(newDate().getTime() + 1000 * 3600 * 24 * 10) };
+        const issue = { owner: form.owner.value, title: form.title.value, due: new Date(new Date().getTime() + 1000 * 3600 * 24 * 10) };
         this.props.createIssue(issue);
         form.owner.value = ""; form.title.value = "";
     }
