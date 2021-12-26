@@ -47,6 +47,7 @@ function setAboutMessage(_, { message }) {
     return aboutMessage = message;
 };
 function issueAdd(_, { issue }) {
+    validateIssue(issue);
     issue.created = new Date();
     issue.id = issueDB.length + 1;
     if (issue.status == undefined) issue.status = 'New';
