@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, UserInputError } = require('apollo-server-express');
 const { GraphQLScalarType } = require('graphql');
 const app = express();
 const { Kind } = require('graphql/language');
@@ -53,9 +53,23 @@ function issueAdd(_, { issue }) {
     issueDB.push(issue);
     return issue;
 }
+function validateIssue(_, { issue }) {
+    const errors = [];
+    if (issue.title.length < 3) {
+        errors.push('Field "title" must be at least 3 characters long.')
+    }
+    if (issue.status == 'Assigned' && !issue.owner) {
+        errors.push('Field "owner" is required when status is "Assigned"');
+    }
+    if (errors.length > 0) throw new UserInputError('invalid input(s)', { errors })
+}
 const GraphQLServer = new ApolloServer({
     typeDefs: fs.readFileSync('./server/schema.graphql', 'utf-8'),
     resolvers,
+    formatError: error => {
+        console.log(error);
+        return error;
+    }
 });
 
 app.use(express.static('./public'));
