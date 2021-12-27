@@ -47,14 +47,14 @@ function setAboutMessage(_, { message }) {
     return aboutMessage = message;
 };
 function issueAdd(_, { issue }) {
-    validateIssue(issue);
+    issueValidate(_, { issue });
     issue.created = new Date();
     issue.id = issueDB.length + 1;
     if (issue.status == undefined) issue.status = 'New';
     issueDB.push(issue);
     return issue;
 }
-function validateIssue(_, { issue }) {
+function issueValidate(_, { issue }) {
     const errors = [];
     if (issue.title.length < 3) {
         errors.push('Field "title" must be at least 3 characters long.')
@@ -62,7 +62,7 @@ function validateIssue(_, { issue }) {
     if (issue.status == 'Assigned' && !issue.owner) {
         errors.push('Field "owner" is required when status is "Assigned"');
     }
-    if (errors.length > 0) throw new UserInputError('invalid input(s)', { errors })
+    if (errors.length > 0) throw new UserInputError('Invalid input(s)', { errors })
 }
 const GraphQLServer = new ApolloServer({
     typeDefs: fs.readFileSync('./server/schema.graphql', 'utf-8'),
