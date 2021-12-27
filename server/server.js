@@ -4,6 +4,7 @@ const { ApolloServer, UserInputError } = require('apollo-server-express');
 const { GraphQLScalarType } = require('graphql');
 const app = express();
 const { Kind } = require('graphql/language');
+require('dotenv').config();
 
 const GraphQLDate = new GraphQLScalarType({
     name: 'GraphQLDate',
