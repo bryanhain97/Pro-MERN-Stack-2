@@ -4,7 +4,10 @@ const { ApolloServer, UserInputError } = require('apollo-server-express');
 const { GraphQLScalarType } = require('graphql');
 const app = express();
 const { Kind } = require('graphql/language');
-require('dotenv').config();
+// const runDB = require('./database'); // WORKS
+// runDB().catch(err => console.dir(err)); WORKS
+
+
 
 const GraphQLDate = new GraphQLScalarType({
     name: 'GraphQLDate',
@@ -24,6 +27,7 @@ const GraphQLDate = new GraphQLScalarType({
         return undefined;
     },
 })
+
 
 let aboutMessage = "Issue Tracker API v1.0";
 const issueDB = [
