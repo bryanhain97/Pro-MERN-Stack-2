@@ -4,8 +4,6 @@ const { ApolloServer, UserInputError } = require('apollo-server-express');
 const { GraphQLScalarType } = require('graphql');
 const app = express();
 const { Kind } = require('graphql/language');
-// const runDB = require('./database'); // WORKS
-// runDB().catch(err => console.dir(err)); WORKS
 
 
 
