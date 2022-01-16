@@ -16,10 +16,10 @@ async function LogDecryptedPassword(password) {
     const encryptedPassword = await bcrypt.hash(myPassword, saltRounds);
     try {
         const match = await bcrypt.compare(password, encryptedPassword);
-        if(match){
+        if (match) {
             console.log('You typed in the right password!')
         }
-        else if(!match){
+        else if (!match) {
             console.log('False Password. Try again!')
         }
     }

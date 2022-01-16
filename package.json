@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -w server -e js,graphql server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "babel src/App.jsx --out-dir public && webpack",
+    "compile": "babel src/App.jsx --out-dir public && npx webpack",
     "watch": "babel src/App.jsx --out-dir public --watch --verbose"
   },
   "author": "Bryan Hain",
